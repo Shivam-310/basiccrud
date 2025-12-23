@@ -49,7 +49,7 @@ function RecordModel() {
                 Register
             </button>
         </div>
-
+            
         </div>
     </div>
   )
