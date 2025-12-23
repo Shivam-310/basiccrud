@@ -72,22 +72,24 @@ function RecordTable() {
                                 Data analyst
                             </td>
                             <td className='px-6 py-2 whitespace-nowrap text-sm text-gray-900'>
-                                <button className='flex items-center gap-1 bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-blue-700 transition-all text-sm font-medium'>
+                                <div className='flex items-center justify-center gap-2'>
+                                    <button className='flex items-center gap-1 bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-blue-700 transition-all text-sm font-medium'>
                                     <Edit2 size={16}/> Edit
                                 </button>
-                                <button className='flex items-center gap-1 bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition-all text-sm font-medium'>
-                                    <Trash2 size={16}/> Edit
+                                <button className='flex items-center gap-1 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition-all text-sm font-medium'>
+                                    <Trash2 size={16}/> Delete
                                 </button>
-                                <button className='flex items-center gap-1 bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition-all text-sm font-medium'>
-                                    <Trash2 size={16}/> Edit
-                                </button>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            {/* footer */}
+            <div className='bg-gray-50 px-6 py-3 border-t border-gray-200'>
+                <p className='text-sm text-gray-600'>Showing Sorted records of all records</p>
+            </div>
         </div>
-
       </div>
     </div>
   )
