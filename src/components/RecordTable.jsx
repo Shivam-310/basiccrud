@@ -1,4 +1,4 @@
-import { Edit2, Plus } from 'lucide-react'
+import { Edit2, Plus, Trash2 } from 'lucide-react'
 
 function RecordTable() {
   return (
@@ -74,6 +74,9 @@ function RecordTable() {
                             <td className='px-6 py-2 whitespace-nowrap text-sm text-gray-900'>
                                 <button className='flex items-center gap-1 bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-blue-700 transition-all text-sm font-medium'>
                                     <Edit2 size={16}/> Edit
+                                </button>
+                                <button className='flex items-center gap-1 bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition-all text-sm font-medium'>
+                                    <Trash2 size={16}/> Edit
                                 </button>
                             </td>
                         </tr>
