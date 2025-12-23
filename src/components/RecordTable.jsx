@@ -1,4 +1,5 @@
 import { Edit2, Plus, Trash2 } from 'lucide-react'
+import RecordModel from './RecordModel'
 
 function RecordTable() {
   return (
@@ -91,6 +92,8 @@ function RecordTable() {
             </div>
         </div>
       </div>
+        {/* Record model */}
+        <RecordModel />
     </div>
   )
 }
