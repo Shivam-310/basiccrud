@@ -78,6 +78,9 @@ function RecordTable() {
                                 <button className='flex items-center gap-1 bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition-all text-sm font-medium'>
                                     <Trash2 size={16}/> Edit
                                 </button>
+                                <button className='flex items-center gap-1 bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition-all text-sm font-medium'>
+                                    <Trash2 size={16}/> Edit
+                                </button>
                             </td>
                         </tr>
                     </tbody>
