@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const recordsSlide = createSlice ({
+const recordsSlice = createSlice ({
     name: "records",
     initialState: {
         items: "",
@@ -11,4 +11,4 @@ const recordsSlide = createSlice ({
     reducers: {},
 });
 
-export default recordsSlide.reducer;
+export default recordsSlice.reducer;
