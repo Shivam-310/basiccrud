@@ -1,7 +1,7 @@
 import { Edit2, Plus, Trash2 } from 'lucide-react';
 import RecordModel from './RecordModel';
 import { 
-    // deleteRecord,
+    deleteRecord,
     selectAllRecords,
     setSearchTerm,
     selectFilteredRecords,
@@ -11,7 +11,7 @@ import { useDispatch, useSelector, } from 'react-redux';
 import { useState } from 'react';
 
 
-function RecordTable() {
+function RecordTable(){
     const dispatch = useDispatch();
 
     const filteredRecords = useSelector(selectFilteredRecords);
@@ -38,6 +38,9 @@ function RecordTable() {
         setCurrentRecord (null);
     }
 
+    const handleDelete = (record) => {
+        dispatch(deleteRecord(record.id));
+    };
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -117,10 +120,10 @@ function RecordTable() {
                             </td>
                             <td className='px-6 py-2 whitespace-nowrap text-sm text-gray-900'>
                                 <div className='flex items-center justify-center gap-2'>
-                                    <button className='flex items-center gap-1 bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-blue-700 transition-all text-sm font-medium'>
+                                    <button className='flex items-center gap-1 bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-blue-700 transition-all text-sm font-medium' onClick={()=> openEditModel(record)} >
                                     <Edit2 size={16}/> Edit
                                 </button>
-                                <button className='flex items-center gap-1 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition-all text-sm font-medium'>
+                                <button className='flex items-center gap-1 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition-all text-sm font-medium' onClick={()=> handleDelete(record)}>
                                     <Trash2 size={16}/> Delete
                                 </button>
                                 </div>
@@ -134,12 +137,12 @@ function RecordTable() {
             </div>
             {/* footer */}
             <div className='bg-gray-50 px-6 py-3 border-t border-gray-200'>
-                <p className='text-sm text-gray-600'>Showing Sorted records of all records</p>
+                <p className='text-sm text-gray-600'> showing {storedRecords.length} of {allRecords.length} records</p>
             </div>
         </div>
       </div>
         {/* Record model */}
-        {/* <RecordModel /> */}
+        <RecordModel isOpen={showModel} onClose={closeModel} currentRecord={currentRecord} />
     </div>
   );
 }

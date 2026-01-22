@@ -97,7 +97,7 @@ const recordsSlice = createSlice ({
 });
 
 export const { addRecord, 
-    updatedRecord, 
+    updateRecord, 
     deleteRecord, 
     setSearchTerm, 
     resetAllRecords,
@@ -108,12 +108,12 @@ export const selectAllRecords = (state) => state.records.items;
 export const selectSearchTerm = (state) => state.records.seachTerm;
 
 export const selectFilteredRecords = (state) => {
-    const term = state.records.seachTerm.toLowerCase();
+    const term = state.records.searchTerm.toLowerCase();
     return state.records.items.filter((r) =>
         r.name.toLowerCase().includes(term) ||
         r.email.toLowerCase().includes(term) || 
         r.position.toLowerCase().includes(term)
-);
+    );
 };
 
 export default recordsSlice.reducer;
