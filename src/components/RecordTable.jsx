@@ -1,7 +1,44 @@
-import { Edit2, Plus, Trash2 } from 'lucide-react'
-import RecordModel from './RecordModel'
+import { Edit2, Plus, Trash2 } from 'lucide-react';
+import RecordModel from './RecordModel';
+import { 
+    // deleteRecord,
+    selectAllRecords,
+    setSearchTerm,
+    selectFilteredRecords,
+    selectSearchTerm,
+ } from '../store/recordsSlice';
+import { useDispatch, useSelector, } from 'react-redux';
+import { useState } from 'react';
+
 
 function RecordTable() {
+    const dispatch = useDispatch();
+
+    const filteredRecords = useSelector(selectFilteredRecords);
+    const allRecords = useSelector(selectAllRecords);
+    const searchTerm = useSelector(selectSearchTerm);
+
+    const storedRecords = [...filteredRecords].sort((a, b) => a.id - b.id);
+
+    const [showModel, setShowModel] = useState(false);
+    const [currentRecord, setCurrentRecord] = useState(null);
+
+    const openCreateModel = () => {
+        setCurrentRecord (null);
+        setShowModel (true);
+    }
+
+    const openEditModel = (record) => {
+        setCurrentRecord (record);
+        setShowModel (true);
+    }
+
+    const closeModel = () => {
+        setShowModel (false);
+        setCurrentRecord (null);
+    }
+
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-7xl mx-auto">
@@ -15,9 +52,13 @@ function RecordTable() {
             <div className='flex flex-col md:flex-row gap-4'>
                 <div>
                     <search className='absolute left-3 top-1/2 transform-translate-y-1/2 text-gray-400 size={20}' />
-                    <input type='text' placeholder='search by name, email or position' className='w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus-ring-blue-500' />
+                    <input type='text' value={searchTerm}
+                    onChange={(e) => dispatch (setSearchTerm (e.target.value))} 
+                    placeholder='search by name, email or position' className='w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus-ring-blue-500' />
                 </div>
-                <button className='flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all'>
+                <button className='flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all' 
+                onClick={openCreateModel}
+                >
                     <Plus size={20} />
                 Add New Record
                 </button>
@@ -50,27 +91,29 @@ function RecordTable() {
                         </tr>
                     </thead>
                     <tbody className='divide-y divide-gray-200'>
-                        <tr className='px-6 py-12 text-center text-gray-500'>
+                        {/* conditional rendering */}
+                        {storedRecords.length === 0 ?(<tr className='px-6 py-12 text-center text-gray-500'>
                             <td colspan="6">
                                 No Record Found
                             </td>
-                        </tr>
-                        {/* else, map */}
-                        <tr className='hover:bg-gray-50 transition-colors'>
+                        </tr>) : ( 
+                            storedRecords.map((record) => {
+                                return (
+                                     <tr className='hover:bg-gray-50 transition-colors'>
                             <td className='px-6 py-2 whitespace-nowrap text-sm text-gray-900'>
-                                1
+                                {record.id}
                             </td>
                             <td className='px-6 py-2 whitespace-nowrap text-sm text-gray-900'>
-                                Batman
+                                {record.name}
                             </td>
                             <td className='px-6 py-2 whitespace-nowrap text-sm text-gray-900'>
-                                batM@gmail.com
+                                {record.email}
                             </td>
                             <td className='px-6 py-2 whitespace-nowrap text-sm text-gray-900'>
-                                5588546
+                                {record.phone}
                             </td>
                             <td className='px-6 py-2 whitespace-nowrap text-sm text-gray-900'>
-                                Data analyst
+                                {record.position}   
                             </td>
                             <td className='px-6 py-2 whitespace-nowrap text-sm text-gray-900'>
                                 <div className='flex items-center justify-center gap-2'>
@@ -83,6 +126,9 @@ function RecordTable() {
                                 </div>
                             </td>
                         </tr>
+                                );
+                            })
+                        )}
                     </tbody>
                 </table>
             </div>
@@ -93,9 +139,9 @@ function RecordTable() {
         </div>
       </div>
         {/* Record model */}
-        <RecordModel />
+        {/* <RecordModel /> */}
     </div>
-  )
+  );
 }
 
-export default RecordTable
+export default RecordTable;
